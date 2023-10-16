@@ -1,29 +1,14 @@
-const ingredients = [
-  'Potatoes',
-  'Mushrooms',
-  'Garlic',
-  'Tomatos',
-  'Herbs',
-  'Condiments',
-];
+// Напиши скрипт, який реагує на зміну значення input#font-size-control (подія input) і змінює інлайн-стиль span#text, оновлюючи властивість font-size. В результаті, перетягуючи повзунок, буде змінюватися розмір тексту.
 
-//Напиши скрипт, який для кожного елемента масиву ingredients:
-const list = document.querySelector('#ingredients');
+// get input and span
+const inputSlider = document.querySelector('#font-size-control');
+const text = document.querySelector('#text');
 
-function createListOfItems(arr) {
-  const markup = arr.map(ingredient => {
-    // Створить окремий елемент <li>. Обов'язково використовуй метод document.createElement().
-    const li = document.createElement('li');
+// add listener to inputSlider
+inputSlider.addEventListener('change', handleChange);
 
-    // Додасть назву інгредієнта як його текстовий вміст.
-    li.textContent = ingredient;
-
-    // Додасть елементу клас item.
-    li.classList.add('item');
-    return li;
-  });
-  // Після чого, вставить усі <li> за одну операцію у список ul#ingredients.
-  list.append(...markup);
+// callback change font size depending on input slider position
+function handleChange(e) {
+  let changingFontSize = e.target.value;
+  text.style.fontSize = `${changingFontSize}px`;
 }
-
-createListOfItems(ingredients);

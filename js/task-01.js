@@ -1,20 +1,30 @@
-// 1. Порахує і виведе в консоль кількість категорій в ul#categories, тобто елементів li.item.
+// Напиши скрипт, який під час втрати фокусу на інпуті(подія blur), перевіряє його вміст щодо правильної кількості введених символів.
 
-const listOfCategories = document.querySelector('#categories');
+// Яка кількість символів повинна бути в інпуті, зазначається в його атрибуті data-length.
+// Якщо введена правильна кількість символів, то border інпуту стає зеленим, якщо неправильна кількість - червоним.
+// Для додавання стилів використовуй CSS-класи valid і invalid, які ми вже додали у вихідні файли завдання.
 
-const categoriesLi = listOfCategories.children;
-console.log(`Number of categories: ${categoriesLi.length}`);
+// get input
+const input = document.querySelector('#validation-input');
 
-// 2. Для кожного элемента li.item у списку ul#categories, знайде і виведе в консоль текст заголовку елемента (тегу <h2>) і кількість елементів в категорії (усіх <li>, вкладених в нього).
-[...categoriesLi].forEach(item => {
-  // get text from header
-  const h2 = item.firstElementChild;
-  const textH2 = h2.innerHTML;
+// get min number of sybols inside input
+const inputMinSymbolsToNumber = Number(input.dataset.length);
 
-  // get lists' length
-  const innerList = item.lastElementChild;
-  const innerListLength = innerList.children.length;
+// add event listener to input
+input.addEventListener('blur', handleBlur);
 
-  // show message in console
-  console.log(`\nCategory: ${textH2} \nElements: ${innerListLength}\n`);
-});
+// callback work when blur event on input
+function handleBlur(e) {
+  // get number of symbols inside input
+  const symbolsInsideInput = e.currentTarget.value.length;
+
+  // add/remove classes(change border color) if the symbols enough or not
+  if (symbolsInsideInput >= inputMinSymbolsToNumber) {
+    input.classList.remove('invalid');
+    input.classList.add('valid');
+  }
+  if (symbolsInsideInput < inputMinSymbolsToNumber) {
+    input.classList.remove('valid');
+    input.classList.add('invalid');
+  }
+}
