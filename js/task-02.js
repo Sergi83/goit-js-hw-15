@@ -8,22 +8,22 @@ const ingredients = [
 ];
 
 //Напиши скрипт, який для кожного елемента масиву ingredients:
+const list = document.querySelector('#ingredients');
 
-function createListOfIngredients(arr) {
-  let list = document.querySelector('#ingredients');
-  for (let i = 0; i < arr.length; i += 1) {
+function createListOfItems(arr) {
+  const markup = arr.map(ingredient => {
     // Створить окремий елемент <li>. Обов'язково використовуй метод document.createElement().
     const li = document.createElement('li');
 
     // Додасть назву інгредієнта як його текстовий вміст.
-    li.textContent = arr[i];
+    li.textContent = ingredient;
 
     // Додасть елементу клас item.
     li.classList.add('item');
-
-    // Після чого, вставить усі <li> за одну операцію у список ul#ingredients.
-    list.append(li);
-  }
+    return li;
+  });
+  // Після чого, вставить усі <li> за одну операцію у список ul#ingredients.
+  list.append(...markup);
 }
 
-createListOfIngredients(ingredients);
+createListOfItems(ingredients);
