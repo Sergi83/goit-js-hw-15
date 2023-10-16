@@ -1,25 +1,25 @@
-// Лічильник складається зі спану і кнопок, які по кліку повинні збільшувати і зменшувати його значення на одиницю.
+// Напиши скрипт, який змінює кольори фону елемента <body> через інлайн-стиль по кліку на button.change-color і виводить значення кольору в span.color.
 
-// Створи змінну counterValue, в якій буде зберігатися поточне значення лічильника та ініціалізуй її значенням 0.
+// get elements
+const btn = document.querySelector('.change-color');
+const body = document.querySelector('body');
+const span = document.querySelector('.color');
 
-// Додай слухачів кліків до кнопок, всередині яких збільшуй або зменшуй значення лічильника.
+// add listener on button (work on click)
+btn.addEventListener('click', handleClick);
 
-// Оновлюй інтерфейс новим значенням змінної counterValue.
-
-let counterValue = 0;
-const counter = document.querySelector('#value');
-
-const btns = document.querySelectorAll('button');
-btns.forEach(btn => {
-  btn.addEventListener('click', handleClick);
-});
-
-function handleClick(evt) {
-  if (evt.currentTarget.textContent === '+1') {
-    counterValue += 1;
+// callback when click to btn -> change body color + show color's value
+function handleClick(e) {
+  if (e) {
+    // change body's background to random color
+    body.style.backgroundColor = getRandomHexColor();
+    // show body's color hex in span
+    span.innerHTML = getRandomHexColor();
   }
-  if (evt.currentTarget.textContent === '-1') {
-    counterValue -= 1;
-  }
-  return (counter.innerHTML = counterValue);
+}
+// generate random color
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
 }

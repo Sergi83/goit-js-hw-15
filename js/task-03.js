@@ -1,39 +1,34 @@
-const images = [
-  {
-    url: 'https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    alt: 'White and Black Long Fur Cat',
-  },
-  {
-    url: 'https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    alt: 'Orange and White Koi Fish Near Yellow Koi Fish',
-  },
-  {
-    url: 'https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    alt: 'Group of Horses Running',
-  },
-];
+// Напиши скрипт управління формою логіна.
 
-// Напиши скрипт для створення галереї зображень на підставі масиву даних. HTML містить список ul.gallery.
+// Обробка відправлення форми form.login-form повинна відбуватися відповідно до події submit.
+// Під час відправлення форми сторінка не повинна перезавантажуватися.
+// Якщо у формі є незаповнені поля, виводь alert з попередженням про те, що всі поля повинні бути заповнені.
+// Якщо користувач заповнив усі поля і відправив форму, збери значення полів в об'єкт, де ім'я поля буде ім'ям властивості, а значення поля - значенням властивості. Для доступу до елементів форми використовуй властивість elements.
+// Виведи об'єкт із введеними даними в консоль і очисти значення полів форми методом reset.
 
-// Використовуй масив об'єктів images для створення елементів <img>, вкладених в <li>. Для створення розмітки використовуй шаблонні рядки і метод insertAdjacentHTML().
+const form = document.querySelector('.login-form');
 
-// Усі елементи галереї повинні додаватися в DOM за одну операцію додавання.
-// Додай мінімальне оформлення галереї флексбоксами або грідами через CSS класи.
+// add event listener to form
+form.addEventListener('submit', handleSubmit);
 
-const gallery = document.querySelector('.gallery');
+// callback work when submit event on form
+function handleSubmit(e) {
+  e.preventDefault();
+  // get email value
+  let emailInputValue = form.elements['email'].value;
+  // get password value
+  let passwordInputValue = form.elements['password'].value;
 
-gallery.classList.add('js-images-list');
+  // check if all form's inputs are filled, create object with inputs values and reset form's inputs, if not filled - show alert message
+  if (!!emailInputValue === false || !!passwordInputValue === false) {
+    e.preventDefault();
 
-function createGallery(arr) {
-  const markup = arr
-    .map(
-      ({ url, alt }) => `<li>
-  <img class="js-img" src="${url}" alt="${alt}" /></li>`
-    )
-    .join('');
-
-  gallery.insertAdjacentHTML('beforeend', markup);
+    return alert('All inputs should be filled!');
+  } else {
+    console.log(
+      { emailInputValue, passwordInputValue },
+      'object email, password values'
+    );
+    e.target.reset();
+  }
 }
-
-console.log(gallery);
-createGallery(images);
