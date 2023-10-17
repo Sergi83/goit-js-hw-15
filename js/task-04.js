@@ -11,10 +11,11 @@ btn.addEventListener('click', handleClick);
 // callback when click to btn -> change body color + show color's value
 function handleClick(e) {
   if (e) {
+    const randomColor = getRandomHexColor();
     // change body's background to random color
-    body.style.backgroundColor = getRandomHexColor();
+    body.style.backgroundColor = randomColor;
     // show body's color hex in span
-    span.innerHTML = getRandomHexColor();
+    span.innerHTML = randomColor;
   }
 }
 // generate random color
