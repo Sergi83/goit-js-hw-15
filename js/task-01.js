@@ -15,16 +15,18 @@ input.addEventListener('blur', handleBlur);
 
 // callback work when blur event on input
 function handleBlur(e) {
-  // get number of symbols inside input
+  // get number of symbols inside input (without spaces)
   const symbolsInsideInput = e.currentTarget.value.length;
 
-  // add/remove classes(change border color) if the symbols enough or not
-  if (symbolsInsideInput >= inputMinSymbolsToNumber) {
+  // add/remove classes(change border color) if the symbols enough or less
+  if (symbolsInsideInput === inputMinSymbolsToNumber) {
     input.classList.remove('invalid');
     input.classList.add('valid');
-  }
-  if (symbolsInsideInput < inputMinSymbolsToNumber) {
+  } else if (symbolsInsideInput < inputMinSymbolsToNumber) {
     input.classList.remove('valid');
     input.classList.add('invalid');
+  } else {
+    input.classList.remove('invalid');
+    input.classList.remove('valid');
   }
 }

@@ -3,9 +3,11 @@
 // get input and span
 const inputSlider = document.querySelector('#font-size-control');
 const text = document.querySelector('#text');
+// get starting font-size
+text.style.fontSize = `${(16 + 96) / 2}px`;
 
 // add listener to inputSlider
-inputSlider.addEventListener('change', handleChange);
+inputSlider.addEventListener('input', handleChange);
 
 // callback change font size depending on input slider position
 function handleChange(e) {
