@@ -22,11 +22,8 @@ function handleBlur(e) {
   if (symbolsInsideInput === inputMinSymbolsToNumber) {
     input.classList.remove('invalid');
     input.classList.add('valid');
-  } else if (symbolsInsideInput < inputMinSymbolsToNumber) {
+  } else {
     input.classList.remove('valid');
     input.classList.add('invalid');
-  } else {
-    input.classList.remove('invalid');
-    input.classList.remove('valid');
   }
 }
